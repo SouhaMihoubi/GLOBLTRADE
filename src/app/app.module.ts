@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TikerComponent } from './tiker/tiker.component';
@@ -14,14 +12,12 @@ import { MarcheeComponent } from './marchee/marchee.component';
 import { WatchlisteComponent } from './watchliste/watchliste.component';
 import { PortfeuilleComponent } from './portfeuille/portfeuille.component';
 import { FooterComponent } from './footer/footer.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { CryptoAPIService } from './crypto-api.service';
+import { MatTableModule } from '@angular/material';
 import { CointableComponent } from './cointable/cointable.component';
-import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
-import {MatFormFieldModule} from '@angular/material/form-field'
-import {FormsModule} from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
-
+import { from } from 'rxjs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,23 +28,19 @@ import { HttpModule } from '@angular/http';
     MarketComponent,
     CryptoComponent,
     MarcheeComponent,
+    CointableComponent,
     WatchlisteComponent,
     PortfeuilleComponent,
-    FooterComponent,
-    CointableComponent
+    FooterComponent
   ],
   imports: [
+    MatTableModule,
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    FormsModule,
-    HttpModule,
-    MatFormFieldModule,
-    MatSortModule
+
   ],
-  providers: [],
+  providers: [CryptoAPIService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

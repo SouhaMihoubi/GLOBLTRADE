@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./crypto.component.css']
 })
 export class CryptoComponent implements OnInit {
-
+  a
   constructor() { }
 
   ngOnInit() {

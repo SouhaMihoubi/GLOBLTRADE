@@ -1,30 +1,27 @@
+
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 
 
-
-
-
-
 // TODO: Replace this with your own data model type
 export interface CointableItem {
-  
+
   position: number;
   coin: string;
   price: number;
   directvol: number;
   totalvol: number;
   marketcap: number;
-  chg_24:number;
-  
+  chg_24: number;
+
 }
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: CointableItem[] = [
- 
- 
+
+
 ];
 
 /**
@@ -65,7 +62,7 @@ export class CointableDataSource extends DataSource<CointableItem> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  disconnect() { }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
@@ -90,7 +87,7 @@ export class CointableDataSource extends DataSource<CointableItem> {
       switch (this.sort.active) {
         case 'coin': return compare(a.coin, b.coin, isAsc);
         case 'position': return compare(+a.position, +b.position, isAsc);
-        
+
         default: return 0;
       }
     });
