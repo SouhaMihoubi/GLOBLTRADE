@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TikerComponent } from './tiker/tiker.component';
@@ -13,7 +12,12 @@ import { MarcheeComponent } from './marchee/marchee.component';
 import { WatchlisteComponent } from './watchliste/watchliste.component';
 import { PortfeuilleComponent } from './portfeuille/portfeuille.component';
 import { FooterComponent } from './footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CryptoAPIService } from './crypto-api.service';
+import { MatTableModule } from '@angular/material';
+import { CointableComponent } from './cointable/cointable.component';
 
+import { from } from 'rxjs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,15 +28,19 @@ import { FooterComponent } from './footer/footer.component';
     MarketComponent,
     CryptoComponent,
     MarcheeComponent,
+    CointableComponent,
     WatchlisteComponent,
     PortfeuilleComponent,
     FooterComponent
   ],
   imports: [
+    MatTableModule,
+    HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+
   ],
-  providers: [],
+  providers: [CryptoAPIService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
