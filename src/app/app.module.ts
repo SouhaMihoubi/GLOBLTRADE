@@ -15,11 +15,13 @@ import { WatchlisteComponent } from './watchliste/watchliste.component';
 import { PortfeuilleComponent } from './portfeuille/portfeuille.component';
 import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { FormsModule } from '@angular/forms';
 import { MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule } 
 from '@angular/material';
 import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule   } from '@angular/material';
+import { MaterialModule } from "@angular/material";
 
 
 import { DialogOverviewExample } from './portfeuille/dialog-overview-example/dialog-overview-example';
@@ -51,12 +53,13 @@ import { DialogOverviewExampleDialog } from './portfeuille/dialog-overview-examp
     MatPaginatorModule,
     MatTableModule,
     MatInputModule,
-   
+    MaterialModule,
     FormsModule,
     MatDialogModule, 
     MatIconModule,
     MatInputModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
    
     
