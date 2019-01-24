@@ -1,22 +1,40 @@
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!-- Position Column -->
-  <ng-container matColumnDef="Id">
-    <th mat-header-cell *matHeaderCellDef> Id </th>
-    <td mat-cell *matCellDef="let crypto"> {{crypto.Data.Id}} teeeeeeeeest </td>
+  <ng-container matColumnDef="Name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let Crypto"><img class="image" src="https://www.cryptocompare.com{{Crypto.CoinInfo.ImageUrl}}">
+      <div>
+        {{Crypto.CoinInfo.FullName}}<br>
+        {{Crypto.CoinInfo.Name}}
+
+      </div>
+
+    </td>
   </ng-container>
-
-  <!-- Name Column '','','',''];-->
-  <ng-container matColumnDef="Type">
-    <th mat-header-cell *matHeaderCellDef> Type </th>
-    <td mat-cell *matCellDef="let crypto"> {{crypto.Type}} </td>
+  <ng-container matColumnDef="Price">
+    <th mat-header-cell *matHeaderCellDef> Price </th>
+    <td mat-cell *matCellDef="let Crypto"> $ {{Crypto.RAW.USD.PRICE}} </td>
   </ng-container>
-
-  <!-- Weight Column -->
-
-
-  <!-- Symbol Column -->
-
+  <ng-container matColumnDef="Direct">
+    <th mat-header-cell *matHeaderCellDef> Direct Vol. 24H </th>
+    <td mat-cell *matCellDef="let Crypto"> $ {{Crypto.RAW.USD.VOLUME24HOUR}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Total">
+    <th mat-header-cell *matHeaderCellDef> Total Vol. 24H </th>
+    <td mat-cell *matCellDef="let Crypto"> $ {{Crypto.RAW.USD.TOTALVOLUME24HTO}} </td>
+  </ng-container>
+  <ng-container matColumnDef="MktCap">
+    <th mat-header-cell *matHeaderCellDef> MktCap </th>
+    <td mat-cell *matCellDef="let Crypto"> $ {{Crypto.RAW.USD.MKTCAP}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Chg">
+    <th mat-header-cell *matHeaderCellDef> Chg. 24H </th>
+    <td mat-cell *matCellDef="let Crypto"> {{Crypto.RAW.USD.CHANGEPCT24HOUR}} % </td>
+  </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
