@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { CointableDataSource } from './cointable-datasource';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material';
@@ -16,39 +16,37 @@ import { Crypto } from '../models/cryptoModele';
 
 
 export class CointableComponent implements OnInit {
-  dataSource = new CryptoDataSource(this.CryptoService);
-  displayedColumns = ['Id'];
+  dataSource = new MatTableDataSource();
+  displayedColumns = ['Name', 'Price', 'Direct', 'Total', 'MktCap', 'Chg'];
+  coinData: any;
+
   // coinData;
 
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  constructor(private CryptoService: CryptoAPIService) {
+  constructor(public CryptoService: CryptoAPIService) {
+    // console.log(this.CryptoService);
 
   }
 
 
 
   ngOnInit() {
-    /*this.cryptoService.getCrypto("f").subscribe(data => {
-      this.coinData = data.json();
-      this.dataSource = new MatTableDataSource(this.coinData);
-
-
+    this.CryptoService.getCrypto().subscribe((data: any) => {
+      //this.coinData = this.data.json().USD;
+      this.dataSource = new MatTableDataSource(data.Data);
+      //console.log(data.Data[0].CoinInfo.Id);
 
 
     })
     // this.dataSource = new CointableDataSource(this.paginator, this.sort);
 
-    */
+
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
 
-export class CryptoDataSource extends DataSource<any> {
-  constructor(private CryptoService: CryptoAPIService) {
-    super();
-  }
-  connect(): Observable<Crypto[]> {
-    return this.CryptoService.getCrypto();
-  }
-  disconnect() { }
-}
+

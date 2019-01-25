@@ -16,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CryptoAPIService } from './crypto-api.service';
 import { MatTableModule } from '@angular/material';
 import { CointableComponent } from './cointable/cointable.component';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { from } from 'rxjs';
 @NgModule({
@@ -38,6 +40,10 @@ import { from } from 'rxjs';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+
 
   ],
   providers: [CryptoAPIService],
