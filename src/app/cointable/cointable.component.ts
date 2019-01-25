@@ -1,13 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { CointableDataSource } from './cointable-datasource';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatTableModule } from '@angular/material';
 import { CryptoAPIService } from '../crypto-api.service';
-import { Observable } from 'rxjs';
-import { DataSource } from '@angular/cdk/collections';
+import { filter } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import {Crypto} from '../models/cryptoModele';
 
-import { Crypto } from '../models/cryptoModele';
 @Component({
   selector: 'app-cointable',
   templateUrl: './cointable.component.html',
@@ -17,36 +15,36 @@ import { Crypto } from '../models/cryptoModele';
 
 export class CointableComponent implements OnInit {
   dataSource = new MatTableDataSource();
-  displayedColumns = ['Name', 'Price', 'Direct', 'Total', 'MktCap', 'Chg'];
-  coinData: any;
-
-  // coinData;
-
-
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
+  displayedColumns = ['n','Name', 'Price', 'Direct', 'Total', 'MktCap', 'Chg'];
+    
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+ 
+ 
   constructor(public CryptoService: CryptoAPIService) {
-    // console.log(this.CryptoService);
-
+  
   }
 
 
 
   ngOnInit() {
     this.CryptoService.getCrypto().subscribe((data: any) => {
-      //this.coinData = this.data.json().USD;
+      
       this.dataSource = new MatTableDataSource(data.Data);
-      //console.log(data.Data[0].CoinInfo.Id);
-
-
-    })
-    // this.dataSource = new CointableDataSource(this.paginator, this.sort);
-
-
-  }
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.filterPredicate =
+       (datas: Crypto, filters: string) => {
+       return  JSON.stringify(datas).indexOf(filters)!=-1;
+    }
+  })
+}
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    const filters = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filters;
   }
+
 }
 
 

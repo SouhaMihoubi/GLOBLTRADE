@@ -18,8 +18,13 @@ import { MatTableModule } from '@angular/material';
 import { CointableComponent } from './cointable/cointable.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import{MatIconModule} from '@angular/material/icon';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
-import { from } from 'rxjs';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +48,11 @@ import { from } from 'rxjs';
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatPaginatorModule,
+    
+    //MatPaginator, MatTableDataSource
 
 
   ],
