@@ -20,10 +20,8 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule } 
 from '@angular/material';
 import { MatIconModule } from "@angular/material/icon";
+import { MaterialModule } from '@angular/material';
 import { MatDialogModule   } from '@angular/material';
-import { MaterialModule } from "@angular/material";
-
-
 import { DialogOverviewExample } from './portfeuille/dialog-overview-example/dialog-overview-example';
 import { DialogOverviewExampleDialog } from './portfeuille/dialog-overview-example/dialog-overview-example';
 @NgModule({
@@ -37,7 +35,7 @@ import { DialogOverviewExampleDialog } from './portfeuille/dialog-overview-examp
     CryptoComponent,
     MarcheeComponent,
     WatchlisteComponent,
-    
+    MaterialModule,
     PortfeuilleComponent,
     FooterComponent,
     DialogOverviewExampleDialog ,
@@ -53,7 +51,7 @@ import { DialogOverviewExampleDialog } from './portfeuille/dialog-overview-examp
     MatPaginatorModule,
     MatTableModule,
     MatInputModule,
-    MaterialModule,
+    
     FormsModule,
     MatDialogModule, 
     MatIconModule,
