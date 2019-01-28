@@ -35,6 +35,11 @@ export class CointableComponent implements OnInit {
     this.CryptoService.getCrypto().subscribe((data: any) => {
       //this.coinData = this.data.json().USD;
       this.dataSource = new MatTableDataSource(data.Data);
+
+
+      this.dataSource.filterPredicate =
+        (data: Crypto, filter: string) => this.dataSource.data.indexOf(filter) != -1;
+
       //console.log(data.Data[0].CoinInfo.Id);
 
 
@@ -46,6 +51,8 @@ export class CointableComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
+
   }
 }
 

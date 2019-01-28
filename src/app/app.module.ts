@@ -18,6 +18,11 @@ import { MatTableModule } from '@angular/material';
 import { CointableComponent } from './cointable/cointable.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { from } from 'rxjs';
 @NgModule({
@@ -35,7 +40,11 @@ import { from } from 'rxjs';
     PortfeuilleComponent,
     FooterComponent
   ],
-  imports: [
+  imports: [MatIconModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    FormsModule,
+    MatCardModule,
     MatTableModule,
     HttpClientModule,
     BrowserModule,
@@ -43,10 +52,13 @@ import { from } from 'rxjs';
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
+    MatButtonModule,
 
 
   ],
-  providers: [CryptoAPIService],
+  providers: [CryptoAPIService,
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
