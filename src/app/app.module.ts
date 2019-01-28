@@ -21,10 +21,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog'
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
-import { from } from 'rxjs';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,12 +57,10 @@ import { from } from 'rxjs';
     MatInputModule,
     BrowserAnimationsModule,
     MatButtonModule,
-
-
+    MatPaginatorModule,
+    MatToolbarModule
   ],
-  providers: [CryptoAPIService,
-
-  ],
+  providers: [CryptoAPIService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

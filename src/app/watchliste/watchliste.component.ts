@@ -15,7 +15,7 @@ export class WatchlisteComponent implements OnInit {
   }
 
   public getCrypto(coin) {
-    console.log(this.coin);
+   // console.log(this.coin);
     /* this.cryptoService.getCrypto(this.coin).subscribe(result => {
        console.log ("test");
        this.coinData= result.json().Data;
