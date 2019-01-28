@@ -25,9 +25,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
-
-
+import { DialogOverviewExample, DialogOverviewExampleDialog } from './portfeuille/dialog-overview-example/dialog-overview-example';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatGridListModule } from '@angular/material';
+import { MatRippleModule, MatDatepickerModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -42,17 +45,27 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     CointableComponent,
     WatchlisteComponent,
     PortfeuilleComponent,
-    FooterComponent
+    FooterComponent,
+    DialogOverviewExample,
+    DialogOverviewExampleDialog
   ],
+  entryComponents: [DialogOverviewExample,
+    DialogOverviewExampleDialog],
   imports: [MatIconModule,
     ReactiveFormsModule,
+    MatGridListModule,
     MatDialogModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatDatepickerModule,
     FormsModule,
     MatCardModule,
     MatTableModule,
+    MatRippleModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
