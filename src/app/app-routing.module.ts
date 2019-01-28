@@ -6,7 +6,8 @@ import {AppComponent} from '../app/app.component';
 const routes: Routes = [
   { path:'', component:AppComponent},
   {path:'login', component:LoginComponent},
-  {path:'register', component:RegisterComponent}
+  {path:'register', component:RegisterComponent},
+  {path:'coin/:id', component:RegisterComponent}
 ];
 
 
