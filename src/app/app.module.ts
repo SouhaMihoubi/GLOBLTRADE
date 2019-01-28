@@ -60,7 +60,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatPaginatorModule,
     MatToolbarModule
   ],
-  providers: [CryptoAPIService],
+  providers: [CryptoAPIService, //MatPaginator, MatTableDataSource
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

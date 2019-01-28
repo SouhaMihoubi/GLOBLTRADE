@@ -1,0 +1,22 @@
+.emptyportfolio-text {
+    line-height: 50px;
+    color: #ff8e13;
+   
+}
+
+.emptyportfolio-small {
+    font-size: 16px;
+    line-height: 25px;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.emptyportfolio-image img {
+    width: 100%;
+}
+.empties {
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
