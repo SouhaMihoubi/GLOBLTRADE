@@ -31,7 +31,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatGridListModule } from '@angular/material';
 import { MatRippleModule, MatDatepickerModule } from '@angular/material';
-
+import {
+  MatMenuModule,
+  MatNativeDateModule
+} from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,8 +54,8 @@ import { MatRippleModule, MatDatepickerModule } from '@angular/material';
   ],
   entryComponents: [DialogOverviewExample,
     DialogOverviewExampleDialog],
-  imports: [MatIconModule,
-    ReactiveFormsModule,
+  imports: [MatIconModule, MatMenuModule,
+    ReactiveFormsModule, MatNativeDateModule,
     MatGridListModule,
     MatDialogModule,
     MatCheckboxModule,
