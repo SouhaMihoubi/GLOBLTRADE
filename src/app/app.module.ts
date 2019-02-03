@@ -18,11 +18,11 @@ import { MatTableModule } from '@angular/material';
 import { CointableComponent } from './cointable/cointable.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import{MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
-
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import {MatSortModule} from '@angular/material/sort';
 
 
 @NgModule({
@@ -38,7 +38,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     CointableComponent,
     WatchlisteComponent,
     PortfeuilleComponent,
-    FooterComponent
+    FooterComponent,
+    
   ],
   imports: [
     MatTableModule,
@@ -51,7 +52,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatToolbarModule,
     MatIconModule,
     MatPaginatorModule,
-    
+    FlexLayoutModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSortModule 
     //MatPaginator, MatTableDataSource
 
 

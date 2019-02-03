@@ -1,27 +1,27 @@
-.full-width-table {
-  width: 80%;
-}
-
-.image{
-  width: 50px;
-  height: 50px;
-}
 table {
-  width: 80%;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
-.class3{
-  background-color: brown;
+th.mat-header-cell {
+    text-align: left;
+    max-width: 300px;
 }
-:host {
-  display: block;
+
+.image {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    vertical-align: middle;
 }
- 
-.open-close-container {
-  border: 1px solid #dddddd;
-  margin-top: 1em;
-  padding: 20px 20px 0px 20px;
-  color: #000000;
-  font-weight: bold;
-  font-size: 20px;
+
+.text-center span {
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+img span div {
+    margin: 5px;
 }
