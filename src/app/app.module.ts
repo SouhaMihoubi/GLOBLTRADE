@@ -20,7 +20,7 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog'
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,6 +32,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatGridListModule } from '@angular/material';
 import { MatRippleModule, MatDatepickerModule } from '@angular/material';
 import { MatMenuModule, MatNativeDateModule } from '@angular/material';
+import { CoinDetailComponent } from './coin-detail/coin-detail.component';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AuthService } from './auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { MatTabsModule } from '@angular/material/tabs';
+import { from } from 'rxjs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,15 +55,16 @@ import { MatMenuModule, MatNativeDateModule } from '@angular/material';
     PortfeuilleComponent,
     FooterComponent,
     DialogOverviewExample,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    CoinDetailComponent
   ],
   entryComponents: [DialogOverviewExample,
     DialogOverviewExampleDialog],
-  imports: [MatIconModule, MatMenuModule,
+  imports: [MatIconModule, MatMenuModule, AngularFireModule.initializeApp(environment.firebase), AngularFireDatabaseModule,
     ReactiveFormsModule, MatNativeDateModule,
     MatGridListModule,
     MatDialogModule,
-    MatCheckboxModule,
+    MatCheckboxModule, MatTabsModule,
     MatRadioModule,
     MatDatepickerModule,
     FormsModule,
@@ -73,7 +82,7 @@ import { MatMenuModule, MatNativeDateModule } from '@angular/material';
     MatPaginatorModule,
     MatToolbarModule
   ],
-  providers: [CryptoAPIService, //MatPaginator, MatTableDataSource
+  providers: [CryptoAPIService, AuthService, AngularFireAuth,
   ],
   bootstrap: [AppComponent]
 })
