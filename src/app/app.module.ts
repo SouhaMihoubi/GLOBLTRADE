@@ -16,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CryptoAPIService } from './crypto-api.service';
 import { MatTableModule } from '@angular/material';
 import { CointableComponent } from './cointable/cointable.component';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -32,6 +32,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatGridListModule } from '@angular/material';
 import { MatRippleModule, MatDatepickerModule } from '@angular/material';
 import { MatMenuModule, MatNativeDateModule } from '@angular/material';
+import { CoinDetailComponent } from './coin-detail/coin-detail.component';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { MatInputModule } from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,11 +52,12 @@ import { MatMenuModule, MatNativeDateModule } from '@angular/material';
     PortfeuilleComponent,
     FooterComponent,
     DialogOverviewExample,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    CoinDetailComponent
   ],
   entryComponents: [DialogOverviewExample,
     DialogOverviewExampleDialog],
-  imports: [MatIconModule, MatMenuModule,
+  imports: [MatIconModule, MatMenuModule, AngularFireModule.initializeApp(environment.firebase), AngularFireDatabaseModule,
     ReactiveFormsModule, MatNativeDateModule,
     MatGridListModule,
     MatDialogModule,

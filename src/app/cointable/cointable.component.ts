@@ -47,7 +47,7 @@ import {
 export class CointableComponent implements OnInit {
   interval: any;
   dataSource = new MatTableDataSource();
-  displayedColumns = ['n', 'Name', 'Price', 'Direct', 'Total', 'MktCap', 'Chg'];
+  displayedColumns = ['n', 'Name', 'Price', 'Direct', 'Total', 'MktCap', 'Chard', 'Chg'];
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
