@@ -1,4 +1,4 @@
-//export interface Crypto {
+// export interface Crypto {
 
 export interface Crypto {
     Message: string;
@@ -9,6 +9,7 @@ export interface Crypto {
     HasWarning: boolean;
 }
 
+// tslint:disable-next-line:no-empty-interface
 interface RateLimit {
 }
 

@@ -23,8 +23,23 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import {MatGridListModule} from '@angular/material/grid-list';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {MatSortModule} from '@angular/material/sort';
-import {MatTabsModule} from '@angular/material/tabs';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogOverviewExample, DialogOverviewExampleDialog } from './portfeuille/dialog-overview-example/dialog-overview-example';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRippleModule, MatDatepickerModule } from '@angular/material';
+import { MatMenuModule, MatNativeDateModule } from '@angular/material';
+import { CoinDetailComponent } from './coin-detail/coin-detail.component';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AuthService } from './auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { MatTabsModule } from '@angular/material/tabs';
+import { from } from 'rxjs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,17 +55,31 @@ import {MatTabsModule} from '@angular/material/tabs';
     PortfeuilleComponent,
     FooterComponent,
     
+    DialogOverviewExample,
+    DialogOverviewExampleDialog,
+    CoinDetailComponent
   ],
-  imports: [
+  entryComponents: [DialogOverviewExample,
+    DialogOverviewExampleDialog],
+  imports: [MatIconModule, MatMenuModule, AngularFireModule.initializeApp(environment.firebase), AngularFireDatabaseModule,
+    ReactiveFormsModule, MatNativeDateModule,
+    MatGridListModule,
+    MatDialogModule,
+    MatCheckboxModule, MatTabsModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    FormsModule,
+    MatCardModule,
     MatTableModule,
+    MatRippleModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
+    MatButtonModule,
     MatPaginatorModule,
     FlexLayoutModule,
     MatButtonModule,
@@ -60,12 +89,11 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatCardModule,
     MatGridListModule,
     MatSortModule ,
-    MatTabsModule
-    //MatPaginator, MatTableDataSource
-
-
+    MatTabsModule,
+    MatToolbarModule,
   ],
-  providers: [CryptoAPIService],
+  providers: [CryptoAPIService, AuthService, AngularFireAuth,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

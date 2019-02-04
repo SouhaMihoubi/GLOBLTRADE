@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,HostBinding } from '@angular/core';
+import { Component, OnInit, ViewChild, HostBinding } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { CryptoAPIService } from '../crypto-api.service';
 import {Crypto} from '../models/cryptoModele';
@@ -21,8 +21,19 @@ export class CointableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public CryptoService: CryptoAPIService) {
-  
+
   }
+
+  // ngAfterViewInit(){
+  /*  this.CryptoService= Observable
+   .interval(1000)
+   .startWith(0).switchMap(() => this.CryptoService.getCrypto()); */
+
+
+
+
+  //}
+
 
 
  refreshData(){
