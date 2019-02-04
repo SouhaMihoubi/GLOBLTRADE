@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { store } from '@angular/core/src/render3';
-import { Observable, from } from 'rxjs';
-import { map } from 'rxjs/operators';
+import 'rxjs';
 import { shouldCallLifecycleInitHook } from '@angular/core/src/view';
 import { NgForm } from '@angular/forms';
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { User } from 'firebase';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/internal/operators/map';
 
 @Component({
   selector: 'app-register',
@@ -38,7 +39,7 @@ export class RegisterComponent implements OnInit {
     this.itemsRef = db.list('users');
     // Use snapshotChanges().map() to store the key
     this.items = this.itemsRef.snapshotChanges().pipe(
-      map(changes =>
+      map((changes: any) =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
