@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CryptoAPIService } from '../crypto-api.service';
 import {Crypto} from '../models/cryptoModele';
 import { Chart } from 'chart.js';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router, Event, NavigationStart, NavigationEnd, NavigationError} from '@angular/router';
 import { Location } from '@angular/common';
 
 
@@ -20,10 +20,19 @@ export class MarcheeComponent implements OnInit {
   constructor(public CryptoService: CryptoAPIService, 
     private route: ActivatedRoute,
     private location: Location,
+    private router: Router,
   ) {
-  
+    router.events.subscribe( (event: Event) => {
+
+      if (event instanceof NavigationEnd) {
+        let id = this.route.snapshot.paramMap.get('id');
+        this.getchart(id);
+      }
+
+  });
   }
   ngAfterViewInit(){
+    
     this.interval = setInterval(() => { 
       this.refreshData(); 
   }, 10000);
@@ -38,8 +47,8 @@ export class MarcheeComponent implements OnInit {
   
    }
 
- getchart(){
-  let id = this.route.snapshot.paramMap.get('id');
+ getchart(id){
+ 
   
   this.CryptoService.coinChart(id).subscribe(res => {
         
@@ -50,7 +59,7 @@ export class MarcheeComponent implements OnInit {
     let Dates = []
     alldates.forEach((res) => {
         let jsdate = new Date(res*1000)
-        Dates.push(jsdate.toLocaleTimeString('en', { month: 'short', day: 'numeric' }))
+        Dates.push(jsdate.toDateString())
     })
 
 this.chart = new Chart('canvas', {
@@ -92,7 +101,7 @@ options: {
    
 
   ngOnInit() {
-    this.getchart();
+   // this.getchart();
     this.refreshData();
     
   
