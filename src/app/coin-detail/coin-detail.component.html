@@ -10,50 +10,44 @@
       <div class="wrapper-ci">
         <div class="ci-trigger">
           <div class="wrapper-pageinfo">
-            <div class="coin-from" ng-if="pageInfo.isICOFinished() || pageInfo.didNotDoAnICO()">{{totalCoinsForConversion}} {{pageInfo.getSymbol()}} =</div>
-            <div class="coin-from" ng-if="pageInfo.isICOUpcoming()">Sale starts in</div>
-            <div class="coin-from" ng-if="pageInfo.isICOOngoing()">Sale ends in</div>
+            <div class="coin-from" ></div>
+            <div class="coin-from" >Sale starts in</div>
+            <div class="coin-from" >Sale ends in</div>
             <div class="coin-logo">
               <div class="coin-logo-mobile">
-                <img ng-src="{{pageInfo.getLogo()}}?width=200" class="img-responsive"/>			
               </div>
             </div>
             <div class="coin-name-v2">
-              <h1>{{pageInfo.getInfoName()}}</h1>
             </div>
           </div>
           <div class="profile-things clearfix">
             <div class="profile-actions">
-              <div ng-show="!userManager.isFollowing()" class="profile-action">
-                <a href="" ng-click="changeFollowingStatus()" class="coin-follow not-following ng-animate-disabled" id="coin-follow-not-already-following">
+              <div class="profile-action">
+                <a href=""  class="coin-follow not-following ng-animate-disabled" id="coin-follow-not-already-following">
                   <span class="fa fa-plus"></span> Follow
                 </a>
               </div>
-              <div ng-show="userManager.isFollowing()"
+              <div 
                  class="profile-action"
                  ng-mouseover="followingHover=true" 
                  ng-mouseleave="followingHover=false">
-                  <a href="" ng-click="changeFollowingStatus()" ng-show="!followingHover" class="coin-follow following ng-animate-disabled" id="coin-follow-already-following">
+                  <a href=""  ng-show="!followingHover" class="coin-follow following ng-animate-disabled" id="coin-follow-already-following">
                     <span class="fa fa-check"></span> Following
                   </a>
-                  <a href="" ng-click="changeFollowingStatus()" ng-show="followingHover" class="coin-unfollow following ng-animate-disabled" id="coin-unfollow-already-following">
+                  <a href=""  ng-show="followingHover" class="coin-unfollow following ng-animate-disabled" id="coin-unfollow-already-following">
                     <span class="fa fa-minus"></span> Unfollow
                   </a>
               </div>
               <div class="profile-action">
-                <a href="" ng-click="addCoinToPortfolio()" class="add-to-portfolio">
+                <a href=""  class="add-to-portfolio">
                   <span class="fa fa-bar-chart"></span> + Portfolio
                 </a>
-                <div class="portfolio-v2" ng-if="portfolioSummary.hasCurrentHoldings()">
-                  <b>{{portfolioSummary.getCurrentHoldingsDisplay()}}</b> = <b>{{getTotalCurrentHoldingsValue()}}</b>
+                <div class="portfolio-v2" >
                 </div>
               </div>
               
             </div>
           </div>
-          <followers-info-box type="coin"></followers-info-box>
-          <ad-desktop-sidebar class-for-panel="panel panel-sidebar panel-similar"></ad-desktop-sidebar>
-          <similar-items type-name="coin"></similar-items>
         </div>
       </div>
     </div>		
@@ -683,6 +677,6 @@
         }
       ]);
     </script>
-
+   
   </div>
 </div>

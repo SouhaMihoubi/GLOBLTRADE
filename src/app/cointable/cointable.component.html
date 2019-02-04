@@ -1,51 +1,63 @@
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
+<div fxLayout fxLayoutAlign="center center">
+    <mat-form-field fxFlex="40%">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+</div>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 m-auto">
-  <ng-container matColumnDef="n">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> #. </th>
-    <td mat-cell *matCellDef="let element; let i = index">{{i+1}}</td>
-  </ng-container>
-  <!-- Position Column -->
-  <ng-container matColumnDef="Name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let Crypto"><a href="coin/{{Crypto.CoinInfo.Name}}"><img class="image" src="https://www.cryptocompare.com{{Crypto.CoinInfo.ImageUrl}}">
-        <div>
-          {{Crypto.CoinInfo.FullName}}<br>
-          {{Crypto.CoinInfo.Name}}
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 m-auto">
+    <ng-container matColumnDef="n">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> #. </th>
+        <td mat-cell *matCellDef="let element; let i = index">{{i+1}}</td>
+    </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Coin </th>
+        <td class="text-center" mat-cell *matCellDef="let Crypto">
 
-        </div>
+            <a routerLink="coin/{{Crypto.CoinInfo.Name}}">
+                <img class="image" src="https://www.cryptocompare.com{{Crypto.CoinInfo.ImageUrl}}">
+                <span>
+                <div> {{Crypto.CoinInfo.FullName}} </div>
+                <div>{{Crypto.CoinInfo.Name}}</div>
 
-      </a></td>
+            </span>
+            </a>
 
-  </ng-container>
-  <ng-container matColumnDef="Price">
-    <th mat-header-cell *matHeaderCellDef> Price </th>
-    <td mat-cell *matCellDef="let Crypto" class="price"> $ {{Crypto.RAW.USD.PRICE}} </td>
-  </ng-container>
-  <ng-container matColumnDef="Direct">
-    <th mat-header-cell *matHeaderCellDef> Direct Vol. 24H </th>
-    <td mat-cell *matCellDef="let Crypto"> $ {{Crypto.RAW.USD.VOLUME24HOUR.toFixed(2)}} </td>
-  </ng-container>
-  <ng-container matColumnDef="Total">
-    <th mat-header-cell *matHeaderCellDef> Total Vol. 24H </th>
-    <td mat-cell *matCellDef="let Crypto"> $ {{Crypto.RAW.USD.TOTALVOLUME24HTO.toFixed(2)}} </td>
-  </ng-container>
-  <ng-container matColumnDef="MktCap">
-    <th mat-header-cell *matHeaderCellDef> MktCap </th>
-    <td mat-cell *matCellDef="let Crypto"> $ {{Crypto.RAW.USD.MKTCAP.toFixed(2)}}</td>
-  </ng-container>
-  <ng-container matColumnDef="Chard">
-    <th mat-header-cell *matHeaderCellDef> Chard </th>
-    <td mat-cell *matCellDef="let Crypto"> <img src="//images.cryptocompare.com/sparkchart/{{Crypto.CoinInfo.Name}}/USD/latest.png?ts=1548930000">
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="Chg">
-    <th mat-header-cell *matHeaderCellDef> Chg. 24H </th>
-    <td mat-cell *matCellDef="let Crypto"> {{Crypto.RAW.USD.CHANGEPCT24HOUR.toFixed(2)}} % </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </td>
+
+    </ng-container>
+    <ng-container matColumnDef="Price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td mat-cell *matCellDef="let Crypto" class="price"> {{Crypto.DISPLAY.USD.PRICE}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Direct">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Vol. 1H </th>
+        <td mat-cell *matCellDef="let Crypto"> {{Crypto.DISPLAY.USD.VOLUMEHOURTO}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Total">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Vol. 24H </th>
+        <td mat-cell *matCellDef="let Crypto"> {{Crypto.DISPLAY.USD.TOTALVOLUME24HTO}} </td>
+    </ng-container>
+    <ng-container matColumnDef="MktCap">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> MktCap </th>
+        <td mat-cell *matCellDef="let Crypto"> {{Crypto.DISPLAY.USD.MKTCAP}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="chart">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>7d Chart (USD) </th>
+        <td mat-cell *matCellDef="let Crypto"><img src="https://images.cryptocompare.com/sparkchart/{{Crypto.CoinInfo.Name}}/USD/latest.png?ts=1549138800"></td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Chg">
+
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Chg. 24H </th>
+
+        <td mat-cell [ngStyle]="{'color':Crypto.RAW.USD.CHANGEPCT24HOUR > 0 ? 'green' : 'red' }" *matCellDef="let Crypto"> {{Crypto.RAW.USD.CHANGEPCT24HOUR.toFixed(2)}} % </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<mat-paginator [length]="100" [pageSize]="25" [pageSizeOptions]="[25, 50, 75, 100]">
+</mat-paginator>

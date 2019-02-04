@@ -18,25 +18,28 @@ import { MatTableModule } from '@angular/material';
 import { CointableComponent } from './cointable/cointable.component';
 import { MatFormFieldModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule } from '@angular/material';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import {MatSortModule} from '@angular/material/sort';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog'
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 import { DialogOverviewExample, DialogOverviewExampleDialog } from './portfeuille/dialog-overview-example/dialog-overview-example';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatGridListModule } from '@angular/material';
 import { MatRippleModule, MatDatepickerModule } from '@angular/material';
 import { MatMenuModule, MatNativeDateModule } from '@angular/material';
 import { CoinDetailComponent } from './coin-detail/coin-detail.component';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
-import { MatInputModule } from '@angular/material';
+import { AuthService } from './auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { MatTabsModule } from '@angular/material/tabs';
+import { from } from 'rxjs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +54,7 @@ import { MatInputModule } from '@angular/material';
     WatchlisteComponent,
     PortfeuilleComponent,
     FooterComponent,
+    
     DialogOverviewExample,
     DialogOverviewExampleDialog,
     CoinDetailComponent
@@ -61,7 +65,7 @@ import { MatInputModule } from '@angular/material';
     ReactiveFormsModule, MatNativeDateModule,
     MatGridListModule,
     MatDialogModule,
-    MatCheckboxModule,
+    MatCheckboxModule, MatTabsModule,
     MatRadioModule,
     MatDatepickerModule,
     FormsModule,
@@ -77,9 +81,18 @@ import { MatInputModule } from '@angular/material';
     BrowserAnimationsModule,
     MatButtonModule,
     MatPaginatorModule,
-    MatToolbarModule
+    FlexLayoutModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSortModule ,
+    MatTabsModule,
+    MatToolbarModule,
   ],
-  providers: [CryptoAPIService, //MatPaginator, MatTableDataSource
+  providers: [CryptoAPIService, AuthService, AngularFireAuth,
   ],
   bootstrap: [AppComponent]
 })
