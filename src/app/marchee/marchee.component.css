@@ -1,0 +1,20 @@
+ .example-card {
+     height: 500px;
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ .card {
+     height: 800px;
+ }
+ 
+ .image {
+     width: 180px;
+     height: 180px;
+     margin: 10px;
+ }
+ 
+ mat-tab-group {
+     display: flex;
+     flex-direction: column;
+ }
