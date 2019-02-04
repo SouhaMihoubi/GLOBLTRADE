@@ -7,7 +7,7 @@ import {Chart} from 'chart.js'
   providedIn: 'root'
 })
 export class CryptoAPIService {
-  private cryptoUrl = 'https://min-api.cryptocompare.com/data/top/totalvolfull?limit=100&tsym=USD' //'https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR';
+  private cryptoUrl = 'https://min-api.cryptocompare.com/data/top/totalvolfull?limit=50&tsym=USD' //'https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR';
 
   private chartUrl='https://min-api.cryptocompare.com/data/histoday?fsym=';
   private detailUrl='https://min-api.cryptocompare.com/data/top/exchanges/full?fsym=';
@@ -23,7 +23,7 @@ export class CryptoAPIService {
 
  coinDetail(coin): Observable<Crypto> {
   
-    return this.Http.get<Crypto>(this.detailUrl+coin+'&tsym=USD');
+    return this.Http.get<Crypto>(this.detailUrl+coin+'&tsym=USD&api_key=55447dcf063b6c88eed9387897a338c5699a77ea9a8c2c6d7fe00401046de288');
    
   }
   

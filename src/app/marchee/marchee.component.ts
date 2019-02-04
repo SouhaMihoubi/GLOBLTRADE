@@ -37,7 +37,7 @@ export class MarcheeComponent implements OnInit {
     
     this.interval = setInterval(() => { 
       this.refreshData(); 
-  }, 10000);
+  }, 2000);
   
    }
    refreshData(){
