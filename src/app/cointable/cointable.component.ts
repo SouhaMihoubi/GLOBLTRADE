@@ -27,7 +27,7 @@ export class CointableComponent implements OnInit {
 
  refreshData(){
   this.CryptoService.getCrypto().subscribe((data: any) => {
-     
+    console.log(data);
     this.dataSource = new MatTableDataSource(data.Data);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;

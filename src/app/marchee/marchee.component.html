@@ -1,22 +1,53 @@
-<mat-card class="example-card">
-    <mat-card-header>
-        <div>
-            <mat-card-title>Chart</mat-card-title>
-            <mat-card-subtitle>(1 Month)</mat-card-subtitle>
+<div fxLayout="row">
+    <mat-card fxFlex="20" fxFlexOffset="5" class="card">
+        <mat-card-title>{{result.CoinInfo.FullName}}</mat-card-title>
+        <div> <img mat-card-image class="image" src="https://www.cryptocompare.com{{result.CoinInfo.ImageUrl}}">
         </div>
-    </mat-card-header>
 
-    <mat-card-content>
-        <div class="">
-            {{id}}
-            <div *ngIf="chart">
-                {{id}}
-                <canvas id="canvas">{{ chart }}</canvas>
+
+        <mat-card-content>
+
+
+
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>+Portfolio</button>
+            <button mat-button></button>
+        </mat-card-actions>
+    </mat-card>
+
+
+    <mat-card fxFlex="50" fxFlexOffset="10" class="example-card">
+        <mat-card-header>
+            <div>
+                <mat-card-title>Chart : {{result.CoinInfo.FullName}}</mat-card-title>
+                <mat-card-subtitle>(1 Month)</mat-card-subtitle>
             </div>
-        </div>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-button></button>
-        <button mat-button></button>
-    </mat-card-actions>
-</mat-card>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div class="">
+                {{id}}
+                <div *ngIf="chart">
+                    {{id}}
+                    <canvas id="canvas">{{ chart }}</canvas>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button></button>
+            <button mat-button></button>
+        </mat-card-actions>
+        <mat-tab-group>
+
+
+
+            <mat-tab label="Second"> Content 2 </mat-tab>
+            <mat-tab label="Third"> Content 3 </mat-tab>
+        </mat-tab-group>
+    </mat-card>
+
+
+
+
+</div>

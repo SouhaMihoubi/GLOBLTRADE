@@ -23,7 +23,7 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import {MatGridListModule} from '@angular/material/grid-list';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {MatSortModule} from '@angular/material/sort';
-
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatListModule,
     MatCardModule,
     MatGridListModule,
-    MatSortModule 
+    MatSortModule ,
+    MatTabsModule
     //MatPaginator, MatTableDataSource
 
 
