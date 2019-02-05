@@ -39,6 +39,7 @@ import { environment } from '../environments/environment';
 import { AuthService } from './auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
 import { from } from 'rxjs';
 @NgModule({
   declarations: [

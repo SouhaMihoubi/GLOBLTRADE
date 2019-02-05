@@ -7,6 +7,8 @@ import { Location } from '@angular/common';
 
 
 
+
+
 @Component({
   selector: 'app-marchee',
   templateUrl: './marchee.component.html',
@@ -43,9 +45,9 @@ export class MarcheeComponent implements OnInit {
    refreshData(){
     let id = this.route.snapshot.paramMap.get('id');
   
-  this.CryptoService.coinDetail(id).subscribe(res => {
+  this.CryptoService.getCrypto().subscribe(res  => {
     this.result=res.Data;
-    console.log(this.result);
+   
     
     })
   
@@ -54,11 +56,12 @@ export class MarcheeComponent implements OnInit {
  getchart(id){
  
   
-  this.CryptoService.coinChart(id).subscribe(res => {
+  this.CryptoService.coinChart(id).subscribe( res   =>  {
         
-    let price_max = res['Data'].map(res => res.hight);
-    let price_min = res['Data'].map(res => res.low);
-    let alldates = res['Data'].map(res => res.time);
+    let price_max = res['Data'].map((res : any) => res.hight);
+    
+    let price_min = res['Data'].map((res : any) => res.low);
+    let alldates = res['Data'].map((res : any) => res.time);
  
     let Dates = []
     alldates.forEach((res) => {
@@ -109,10 +112,8 @@ options: {
     this.refreshData();
     this.CryptoService.getArticle().subscribe(articles => {
       this.article=articles.Data;
-      console.log(this.article);
+      
   
 });
   }
 }
-  }
- 

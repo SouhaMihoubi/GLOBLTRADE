@@ -25,7 +25,7 @@ interval: any;
     })
     }
 
-
+/**
     refreshDetail(){
       let id= this.route.snapshot.paramMap.get("id");
       this.CryptoService.detail('BTC').subscribe((res: any) => {
@@ -34,9 +34,9 @@ interval: any;
       console.log(this.result.IMAGEURL);
 
       })
-      }
+      } */
   ngOnInit() {
-    this.refreshDetail();
+   // this.refreshDetail();
     this.refreshData();
    
   }

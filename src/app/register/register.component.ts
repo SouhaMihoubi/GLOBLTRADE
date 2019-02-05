@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { store } from '@angular/core/src/render3';
-import 'rxjs';
+
 import { shouldCallLifecycleInitHook } from '@angular/core/src/view';
 import { NgForm } from '@angular/forms';
 import { Router, Params } from '@angular/router';

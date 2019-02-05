@@ -1,11 +1,11 @@
  .example-card {
-     height: 500px;
+     height: 400px;
      display: flex;
      flex-direction: column;
  }
  
  .card {
-     height: 800px;
+     height: 650px;
  }
  
  .image {
@@ -13,8 +13,34 @@
      height: 180px;
      margin: 10px;
  }
- 
+ .largeur{
+     height: 100px;
+ }
+ .center
+ {
+     text-align: center;
+     vertical-align: center;
+ }
+ .price{
+     font-size: 25px;
+ }
+ .txt{
+     text-align: end;
+ }
+ .mar{
+     height: 50px;
+ }
  mat-tab-group {
      display: flex;
      flex-direction: column;
  }
+
+ mat-card {
+     margin: 5px;
+ }
+ mat-card-title{
+     font-size: 16px;
+ }
+.val{
+    font-size: 12px;
+}
