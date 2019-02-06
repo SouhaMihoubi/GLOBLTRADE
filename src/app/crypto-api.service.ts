@@ -12,6 +12,7 @@ export class CryptoAPIService {
 
   private chartUrl='https://min-api.cryptocompare.com/data/histoday?fsym=';
   private detailUrl='https://min-api.cryptocompare.com/data/top/exchanges/full?fsym=';
+  private marketsUrl='https://min-api.cryptocompare.com/data/top/exchanges/full?fsym=';
   constructor(private Http: HttpClient) { }
 
   getCrypto(): Observable<Crypto> {
@@ -38,7 +39,9 @@ export class CryptoAPIService {
 getArticle():Observable<Crypto> {
   
   return this.Http.get<Crypto>("https://min-api.cryptocompare.com/data/v2/news/?lang=EN");
-
-
+}
+getMarkets(coin):Observable<Crypto> {
+  
+  return this.Http.get<Crypto>(this.marketsUrl+ coin);
 }
 }
