@@ -1,62 +1,97 @@
-<mat-toolbar class="md-toolbar1">
-  <div class="md-toolbar1">
-    <h1>Add a new portfolio
-    </h1>
+<!-- <mat-toolbar color="primary" class="md-toolbar1">
+    <div class="md-toolbar1">
+        <h1>Add a Coin</h1>
+        <button (click)="onNoClick()" mat-stroked-button tabIndex="-1">
+      <mat-icon color="warn">clear</mat-icon>
+    </button>
+    </div>
+</mat-toolbar>-->
+<!-- <mat-tab-group>
 
-  </div>
-</mat-toolbar>
 
 
-<form>
-  <mat-grid-list cols="2" rowHeight="300px">
-    <mat-grid-tile>
-      <div class="controles-container">
+    <mat-tab label="Buy">
+        <form [formGroup]="buyForm">
 
-        <mat-form-field>
-          <input matInput type="search" matInput placeholder="Type to search for a coin*">
-        </mat-form-field>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div class="controles-container">
-        <mat-form-field>
-          <input matInput placeholder="Mobile">
-          <mat-error>This field is wa &.</mat-error>
-          <mat-error>Minimum 8 charactors needed.</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput type="number" placeholder="Buy price">
-        </mat-form-field>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div class="controles-container">
-        <mat-form-field>
-          <select matNativeControl required placeholder="Currency">
-            <option value="USD">USD</option>
-            <option value="GBP">EUR</option>
-            <option value="BTC">BTC</option>
-            <option value="ETH">ETH</option>
-          </select>
-        </mat-form-field>
-        <mat-form-field>
-          <select matNativeControl required placeholder="Price Type">
-            <option value="USD">Per Unit</option>
-            <option value="GBP">Total Value</option>
-          </select>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput type="date" placeholder="Bought on">
-        </mat-form-field>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div class="controles-container">
-        <div class="button-row">
-          <button mat-raised-button color="primary" type="submit">Submit</button>
-          <button mat-raised-button color="warn">Clear</button>
-        </div>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
-</form>
+
+            <mat-form-field>
+                <input matInput placeholder="Coin" formControlName="coin">
+            </mat-form-field>
+            <mat-grid-list cols="1" rowHeight="100px">
+                <mat-grid-tile>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Amount*" formControlName="amount">
+
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Buy Price" formControlName="Buy_Price">
+
+                    </mat-form-field>
+
+                </mat-grid-tile>
+                <mat-grid-tile>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Currency" formControlName="Currency">
+
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <input matInput [matDatepicker]="picker" placeholder="Bought On" formControlName="Bought">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                    </mat-form-field>
+
+                </mat-grid-tile>
+                <label class="error">{{errorMessage}}</label>
+                <label class="success">{{successMessage}}</label>
+            </mat-grid-list>
+            <div class="controles-container">
+
+                <div class="button-row">
+                    <button (click)="addTransaction(buyForm.value)" mat-raised-button color="primary" type="submit">Submit</button>
+                    <button (click)="onNoClick()" mat-raised-button color="warn">Exit</button> {{buyForm.value|json}}
+                </div>
+            </div>
+        </form>
+    </mat-tab>
+    <mat-tab label="Sell">
+        <form>
+            <mat-form-field>
+                <input matInput placeholder="Coin">
+            </mat-form-field>
+            <mat-grid-list cols="1" rowHeight="100px">
+                <mat-grid-tile>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Amount*">
+
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Sell Price">
+
+                    </mat-form-field>
+
+                </mat-grid-tile>
+                <mat-grid-tile>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Currency">
+
+                    </mat-form-field>
+
+
+
+                </mat-grid-tile>
+            </mat-grid-list>
+            <div class="controles-container">
+
+                <div class="button-row">
+                    <button mat-raised-button color="primary" type="submit">Submit</button>
+                    <button (click)="onNoClick()" mat-raised-button color="warn">Exit</button>
+                </div>
+            </div>
+        </form>
+    </mat-tab>
+</mat-tab-group> -->

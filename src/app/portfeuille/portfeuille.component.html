@@ -1,46 +1,245 @@
-<div class="text-center">
-  <div class="container">
-    <div class="row">
-      <div class="container-portfolio">
-        <div>
-          <h1>
-            <span class="fa fa-bar-chart"></span> My Portfolios
-          </h1>
-        </div>
-        <div class="container-emptyportfolio">
-          <div class="emptyportfolio">
-            <div class="emptyportfolio-body">
-              <div class="emptyportfolio-image">
-                <img src="https://www.cryptocompare.com/media/350835/portfolio.png">
-              </div>
-              <div class="text-center">
-                <div class="emptyportfolio-text">This is where it all started!</div>
-                <div class="emptyportfolio-small ">
-                  <p>At some point in the future when your grandkids visit you, you can either tell them:</p>
-                  <div class="empties">
-                    <div class="empty-item"><span class="emptyitem-number">1</span> You missed the boat on
-                      cryptocurrencies.</div>
-                    <div class="empty-item"><span class="emptyitem-number">2</span> You were an early adopter and
-                      made money out of trading cryptos!</div>
-                  </div>
-                  <div class="be-brave text-center">But, before you choose option <span class="emptyitem-number">2</span>
-                    and join the crypto world, you need to</div>
-                </div>
-              </div>
-            </div>
-            <div >
-
-              
-             <!-- <app-addport.component></app-addport.component>-->
-              <dialog-overview-example></dialog-overview-example>
-
-
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
-  </div>
+<div class="container">
+    <mat-toolbar>
+        <span class="spacer"></span>
+        <span>Portfolio</span>
+        <span class="speacer"></span>
+    </mat-toolbar>
 </div>
+
+<div fxLayout="row top">
+    <mat-card fxFlex="15" fxFlexOffset="25">
+
+        <mat-card-title>Acquisition Cost </mat-card-title>
+        <mat-card-content type="number">{{totalCost}}</mat-card-content>
+    </mat-card>
+    <mat-card fxFlex="15">
+        <mat-card-title>Realized P/L </mat-card-title>
+        <mat-card-content type="number"></mat-card-content>
+    </mat-card>
+    <mat-card fxFlex="15">
+        <mat-card-title>Profit / Loss </mat-card-title>
+        <mat-card-content></mat-card-content>
+    </mat-card>
+    <mat-card fxFlex="15">
+        <mat-card-title>Holdings </mat-card-title>
+        <mat-card-content></mat-card-content>
+    </mat-card>
+
+</div>
+<div class="table">
+    <div fxLayout="row ">
+        <mat-card fxFlex="20" fxFlexOffset="5">
+
+            <mat-card-title>Coin</mat-card-title>
+
+        </mat-card>
+        <mat-card fxFlex="10">
+            <mat-card-title>Price</mat-card-title>
+
+        </mat-card>
+        <mat-card fxFlex="10">
+            <mat-card-title>Amount</mat-card-title>
+
+        </mat-card>
+        <mat-card fxFlex="10">
+            <mat-card-title>Buy price</mat-card-title>
+
+        </mat-card>
+        <mat-card fxFlex="10">
+            <mat-card-title>Total Value</mat-card-title>
+
+        </mat-card>
+        <mat-card fxFlex="10">
+            <mat-card-title>Profit/Loss</mat-card-title>
+
+        </mat-card>
+        <mat-card fxFlex="10">
+            <mat-card-title>Change</mat-card-title>
+
+        </mat-card>
+        <mat-card fxFlex="10">
+            <mat-card-title>Buy/Sell</mat-card-title>
+
+        </mat-card>
+
+    </div>
+
+
+
+
+    <div *ngFor="let item of items | async">
+
+        <div *ngFor=" let coin of result">
+
+            <div fxLayout="row" *ngIf="coin.CoinInfo.Name == item.coin">
+
+                <mat-card fxFlex="20" fxFlexOffset="5">
+
+                    <mat-card-content><img class="image" src="https://www.cryptocompare.com{{coin.CoinInfo.ImageUrl}}">{{coin.CoinInfo.Name}} </mat-card-content>
+                    <mat-card-footer></mat-card-footer>
+
+                </mat-card>
+                <mat-card fxFlex="10">
+                    <mat-card-content>{{coin.DISPLAY.USD.PRICE}}</mat-card-content>
+
+                </mat-card>
+                <mat-card fxFlex="10">
+                    <mat-card-content>{{item.amount}}</mat-card-content>
+
+                </mat-card>
+                <mat-card fxFlex="10">
+                    <mat-card-content>{{item.Buy_Price}}</mat-card-content>
+
+                </mat-card>
+                <mat-card fxFlex="10">
+                    <mat-card-content>{{(item.amount*coin.RAW.USD.PRICE).toFixed(2)}} </mat-card-content>
+                    <!--  
+                    <input type="hidden" [(ngmodel)]="cost" value={{item.amount*coin.RAW.USD.PRICE}}> -->
+                </mat-card>
+
+                <mat-card fxFlex="10">
+                    <mat-card-content>{{((item.amount*coin.RAW.USD.PRICE)-(item.amount*item.Buy_Price)).toFixed(2)}}</mat-card-content>
+
+                </mat-card>
+                <mat-card fxFlex="10">
+                    <mat-card-content>{{((((item.amount*coin.RAW.USD.PRICE.toFixed(2))-(item.amount*item.Buy_Price))/((item.amount*item.Buy_Price)))*100).toFixed(2)}}%</mat-card-content>
+
+                </mat-card>
+                <mat-card fxFlex="10">
+                    <mat-card-content> <button mat-raised-button>
+                            <mat-icon>add</mat-icon>Buy/Sell
+                          </button></mat-card-content>
+
+                </mat-card>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- <mat-toolbar color="primary" class="md-toolbar1">
+        <div class="md-toolbar1">
+            <h1>Add a Coin</h1>
+            <button (click)="onNoClick()" mat-stroked-button tabIndex="-1">
+          <mat-icon color="warn">clear</mat-icon>
+        </button>
+        </div>
+    </mat-toolbar>-->
+<mat-tab-group>
+
+
+
+    <mat-tab label="Buy">
+
+        <!--   <div>
+                <form #f="ngForm"  (submit)="addTransaction(f.value)" class="example-container">
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]="transaction.coin" name="coin" placeholder="coin" required/>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]="transaction.amount" name="amount" placeholder="amount" required/>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]="transaction.Buy_Price" name="Buy_Price" placeholder="Buy_Price" required/>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]="transaction.Currency" name="Currency" placeholder="Currency" required/>
+                    </mat-form-field>
+                   
+                    <mat-form-field class="example-full-width">
+                        <input matInput [matDatepicker]="picker" placeholder="Bought On" [(ngModel)]="transaction.Bought" name="Bought">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                    </mat-form-field>
+    
+                    <button mat-button type="submit">Add Coin</button>
+                </form>
+            </div> -->
+        <form (submit)="addTransaction(buyForm.value)" [formGroup]="buyForm">
+
+
+            <mat-form-field>
+                <input matInput placeholder="Coin" formControlName="coin">
+            </mat-form-field>
+            <mat-grid-list cols="1" rowHeight="100px">
+                <mat-grid-tile>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Amount*" formControlName="amount">
+
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Buy Price" formControlName="Buy_Price">
+
+                    </mat-form-field>
+
+                </mat-grid-tile>
+                <mat-grid-tile>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Currency" formControlName="Currency">
+
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <input matInput [matDatepicker]="picker" placeholder="Bought On" formControlName="Bought">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                    </mat-form-field>
+
+                </mat-grid-tile>
+                <label class="error">{{errorMessage}}</label>
+                <label class="success">{{successMessage}}</label>
+            </mat-grid-list>
+            <div class="controles-container">
+
+                <div class="button-row">
+                    <button mat-raised-button color="primary" type="submit">Submit</button>
+                    <button (click)="onNoClick()" mat-raised-button color="warn">Exit</button>
+                </div>
+            </div>
+        </form>
+    </mat-tab>
+    <mat-tab label="Sell">
+        <form>
+            <mat-form-field>
+                <input matInput placeholder="Coin">
+            </mat-form-field>
+            <mat-grid-list cols="1" rowHeight="100px">
+                <mat-grid-tile>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Amount*">
+
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Sell Price">
+
+                    </mat-form-field>
+
+                </mat-grid-tile>
+                <mat-grid-tile>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Currency">
+
+                    </mat-form-field>
+
+
+
+                </mat-grid-tile>
+            </mat-grid-list>
+            <div class="controles-container">
+
+                <div class="button-row">
+                    <button mat-raised-button color="primary" type="submit">Submit</button>
+                    <button (click)="onNoClick()" mat-raised-button color="warn">Exit</button>
+                </div>
+            </div>
+        </form>
+    </mat-tab>
+</mat-tab-group>
