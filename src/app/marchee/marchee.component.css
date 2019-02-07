@@ -8,7 +8,7 @@
      height: 650px;
  }
  .long{
-    height: 1000px;
+    height: 800px!important;
  }
   .news-source {
     
@@ -23,7 +23,12 @@
     color: #999;
     font-size: 13px;
 }
-
+table{
+    width: 100%;
+}
+tr td {
+    width: 165px;
+}
  
  .image {
      width: 180px;
