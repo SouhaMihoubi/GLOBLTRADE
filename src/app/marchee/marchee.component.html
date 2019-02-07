@@ -74,12 +74,13 @@
           </div>
         </div>
       </div>
-      <div fxFlex="90" >
+      <div fxFlex="90">
 
 
-        <mat-card class="example-card" >
-          <mat-tab-group class=long> 
-            <mat-tab label="CHARTS">
+
+        <mat-tab-group>
+          <mat-tab label="CHARTS">
+            <mat-card class="example-card">
               <mat-card-header>
                 <div>
                   <mat-card-title>Chart :</mat-card-title>
@@ -99,40 +100,47 @@
                 <button mat-button></button>
                 <button mat-button></button>
               </mat-card-actions>
-            </mat-tab>
-            <mat-tab label="MARKETS"> Content 3 </mat-tab>
-            <mat-tab label="NEWS">
-              <div *ngFor=" let art of article">
-                <div fxLayout="row">
-                  <mat-card fxFlex="20">
-                    <img mat-card-image class="img" src="{{art.source_info.img}}">
-                  </mat-card>
+            </mat-card>
+          </mat-tab>
+          <mat-tab label="MARKETS"> Content 3 </mat-tab>
+          <mat-tab label="NEWS">
+            <div *ngFor=" let art of article">
+              <div fxLayout="row">
+                <mat-card fxFlex="20">
+                  <img mat-card-image class="img" src="{{art.source_info.img}}">
+                </mat-card>
 
-                  <mat-card fxFlex="80">
-                    
-                      <div fxLayout="column">
-                        <div fxFlex="20" fxLayout="row" class="news-data"  >
-                            <div fxFlex="30" class="news-source">  {{art.source_info.name}} </div>
-                            <div fxFlex="20" class="news-date"> {{(art.published_on/60000000).toFixed(0)}} min ago</div>
-                          </div>
-                        
-                          
-                        <div fxFlex="20"><mat-card-title ><a href="{{art.url}}"> {{art.title}}</a></mat-card-title></div>
-                        <mat-list><mat-divider></mat-divider></mat-list>
-                        <div fxFlex="40">{{art.body}}</div>
-                        <mat-list><mat-divider></mat-divider></mat-list>
-                        <div fxFlex="20" class="news-footer"> Categories:  {{art.categories}}</div>
-                       
-                      
-                      
-                      </div>
-                  </mat-card>
-                </div>
+                <mat-card fxFlex="80">
+
+                  <div fxLayout="column">
+                    <div fxFlex="20" fxLayout="row" class="news-data">
+                      <div fxFlex="30" class="news-source"> {{art.source_info.name}} </div>
+                      <div fxFlex="20" class="news-date"> {{(art.published_on/60000000).toFixed(0)}} min ago</div>
+                    </div>
+
+
+                    <div fxFlex="20">
+                      <mat-card-title><a href="{{art.url}}"> {{art.title}}</a></mat-card-title>
+                    </div>
+                    <mat-list>
+                      <mat-divider></mat-divider>
+                    </mat-list>
+                    <div fxFlex="40">{{art.body}}</div>
+                    <mat-list>
+                      <mat-divider></mat-divider>
+                    </mat-list>
+                    <div fxFlex="20" class="news-footer"> Categories: {{art.categories}}</div>
+
+
+
+                  </div>
+                </mat-card>
               </div>
-            </mat-tab>
+            </div>
+          </mat-tab>
 
-          </mat-tab-group>
-        </mat-card>
+        </mat-tab-group>
+
       </div>
     </div>
   </div>
