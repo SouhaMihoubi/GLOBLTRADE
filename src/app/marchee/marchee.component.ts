@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CryptoAPIService } from '../crypto-api.service';
-import {Crypto} from '../models/cryptoModele';
+import { Crypto } from '../models/cryptoModele';
 import { Chart } from 'chart.js';
 import { ActivatedRoute,Router, Event, NavigationStart, NavigationEnd, NavigationError} from '@angular/router';
 import { Location } from '@angular/common';
-
-
-
 @Component({
   selector: 'app-marchee',
   templateUrl: './marchee.component.html',

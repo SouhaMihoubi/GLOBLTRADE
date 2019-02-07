@@ -5,18 +5,30 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { auth } from 'firebase/app';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
+  /* template: `
+  <div *ngIf="afAuth.user | async as user; else showLogin">
+    <h1>Hello {{ user.displayName }}!</h1>
+    <button (click)="logout()">Logout</button>
+  </div>
+  <ng-template #showLogin>
+    <p>Please login.</p>
+    <button (click)="login()">Login with Google</button>
+  </ng-template>
+` */,
 })
+
 export class LoginComponent {
   loginForm: FormGroup;
   // tslint:disable-next-line:no-inferrable-types
   errorMessage: string = '';
 
-  constructor(public authService: AuthService, private router: Router, private fb: FormBuilder) {
+  constructor(public authService: AuthService, public afAuth: AngularFireAuth, private router: Router, private fb: FormBuilder) {
 
     this.createForm();
     /*
@@ -36,26 +48,11 @@ export class LoginComponent {
       password: ['', Validators.required]
     });
   }
-
-  tryFacebookLogin() {
-    this.authService.doFacebookLogin()
-      .then(res => {
-        this.router.navigate(['/user']);
-      });
+  logout() {
+    this.afAuth.auth.signOut();
   }
-
-  tryTwitterLogin() {
-    this.authService.doTwitterLogin()
-      .then(res => {
-        this.router.navigate(['/user']);
-      });
-  }
-
-  tryGoogleLogin() {
-    this.authService.doGoogleLogin()
-      .then(res => {
-        this.router.navigate(['/user']);
-      });
+  login() {
+    this.afAuth.auth.signInWithRedirect(new auth.GoogleAuthProvider());
   }
 
   tryLogin(value) {
