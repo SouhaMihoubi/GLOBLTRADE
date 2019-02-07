@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild} from '@angular/core';
 import { CryptoAPIService } from '../crypto-api.service';
 import { Crypto } from '../models/cryptoModele';
 import { Chart } from 'chart.js';
 import { ActivatedRoute, Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { Location } from '@angular/common';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 
 
@@ -15,12 +16,19 @@ import { Location } from '@angular/common';
   styleUrls: ['./marchee.component.css']
 })
 export class MarcheeComponent implements OnInit {
+  interval: any;
+  displayedColumns : string[] = ['Market','Price', 'Open 24H', 'Range 24H', 'Last trade', 'Volume 24H','Change 24H'];
+  dataSource = new MatTableDataSource(); 
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   chart = [];
   currentValue: string;
   datas;
   result;
   article;
-  interval: any;
+  market;
+  
+  
   constructor(public CryptoService: CryptoAPIService,
     private route: ActivatedRoute,
     private location: Location,
@@ -105,15 +113,29 @@ export class MarcheeComponent implements OnInit {
     })
 
   }
+  marketsData() {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.CryptoService.getMarkets(id).subscribe(markets => {
+      this.market = markets.Data;
+      console.log(this.market);
+    });
+  }
 
+  articleData(){
+    let id = this.route.snapshot.paramMap.get('id');
+    this.CryptoService.getArticle(id).subscribe(articles => {
+      this.article = articles.Data;
+
+      // console.log(this.article[0].source_info.img);
+    });
+  }
 
   ngOnInit() {
     // this.getchart();
     this.refreshData();
-    this.CryptoService.getArticle().subscribe(articles => {
-      this.article = articles.Data;
-     // console.log(this.article[0].source_info.img);
-    });
-    
+    this.articleData();
+    this.marketsData() ;
+
+
   }
 }

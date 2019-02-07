@@ -23,6 +23,7 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import {MatGridListModule} from '@angular/material/grid-list';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {MatSortModule} from '@angular/material/sort';
+import { OverlayModule } from "@angular/cdk/overlay";
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -65,7 +66,9 @@ import { from } from 'rxjs';
   imports: [MatIconModule, MatMenuModule, AngularFireModule.initializeApp(environment.firebase), AngularFireDatabaseModule,
     ReactiveFormsModule, MatNativeDateModule,
     MatGridListModule,
-    MatDialogModule,
+    
+    [MatDialogModule],
+    [OverlayModule],
     MatCheckboxModule, MatTabsModule,
     MatRadioModule,
     MatDatepickerModule,
