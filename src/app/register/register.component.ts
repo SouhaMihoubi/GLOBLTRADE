@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
 import { User } from 'firebase';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators/map';
-
+import { AngularFireAuth } from 'angularfire2/auth';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -33,7 +33,8 @@ export class RegisterComponent implements OnInit {
     public authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
-    db: AngularFireDatabase
+    db: AngularFireDatabase,
+    public afA: AngularFireAuth
   ) {
     this.createForm();
     this.itemsRef = db.list('users');
@@ -54,26 +55,10 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  tryFacebookLogin() {
-    this.authService.doFacebookLogin()
-      .then(res => {
-        this.router.navigate(['/user']);
-      }, err => console.log(err)
-      );
-  }
-
-  tryTwitterLogin() {
-    this.authService.doTwitterLogin()
-      .then(res => {
-        this.router.navigate(['/user']);
-      }, err => console.log(err)
-      );
-  }
-
   tryGoogleLogin() {
     this.authService.doGoogleLogin()
       .then(res => {
-        this.router.navigate(['/user']);
+        // this.router.navigate(['/user']);
       }, err => console.log(err)
       );
   }
@@ -86,11 +71,11 @@ export class RegisterComponent implements OnInit {
   tryRegister(value) {
     this.authService.doRegister(value)
       .then(res => {
-        console.log(res);
+        console.log(res.user.uid);
         this.errorMessage = '';
         this.successMessage = 'Your account has been created';
         const user = {
-          uid: '11',
+          uid: res.user.uid,
           name: value.nom,
           prenom: value.prenom,
           email: value.email,
@@ -105,6 +90,7 @@ export class RegisterComponent implements OnInit {
         this.successMessage = '';
       });
   }
+
   ngOnInit() { }
 
 }
