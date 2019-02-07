@@ -28,6 +28,7 @@ export class PortfeuilleComponent implements OnInit {
   items: Observable<any[]>;
   authState: any;
   totalCost:any;
+  prof_loss:any;
   uid: string;
   result;
   displayedColumns : string[] = ['Name','buy', 'amount','Price','value','profil','change'];
@@ -50,13 +51,22 @@ export class PortfeuilleComponent implements OnInit {
       this.result=res.Data; 
     
       this.totalCost=0;
+      this.prof_loss=0,
+      
+      /* this.result.forEach(resapi => {
+        this.prof_loss+=(resapi.DISPLAY.USD.PRICE)*parseInt(element.amount)-this.totalCost;
+        
+      }) */
       this.items.subscribe(items=>{
        items.forEach(element => {
-         //console.log(this.items);
+        
          this.totalCost+=parseInt(element.Buy_Price)*parseInt(element.amount); 
+        
        });
-      })
-   
+       
+      
+
+    });
       //console.log(this.result);
       
       })  
