@@ -14,6 +14,9 @@ interface RateLimit {
 }
 
 interface Datum {
+    hight: any;
+    low: any;
+    time: any;
     CoinInfo: CoinInfo;
     RAW: RAW;
     DISPLAY: DISPLAY;

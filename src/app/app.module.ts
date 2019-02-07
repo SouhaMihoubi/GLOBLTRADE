@@ -16,13 +16,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { CryptoAPIService } from './crypto-api.service';
 import { MatTableModule } from '@angular/material';
 import { CointableComponent } from './cointable/cointable.component';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {MatSortModule} from '@angular/material/sort';
+import { OverlayModule } from "@angular/cdk/overlay";
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -39,6 +40,7 @@ import { environment } from '../environments/environment';
 import { AuthService } from './auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
 import { from } from 'rxjs';
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { from } from 'rxjs';
   imports: [MatIconModule, MatMenuModule, AngularFireModule.initializeApp(environment.firebase), AngularFireDatabaseModule,
     ReactiveFormsModule, MatNativeDateModule,
     MatGridListModule,
-    MatDialogModule,
+    
+    [MatDialogModule],
+    [OverlayModule],
     MatCheckboxModule, MatTabsModule,
     MatRadioModule,
     MatDatepickerModule,
