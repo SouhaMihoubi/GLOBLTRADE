@@ -5,12 +5,14 @@ import { Crypto } from '../app/models/cryptoModele';
 import {Chart} from 'chart.js'
 @Injectable({
   providedIn: 'root'
+
 })
 export class CryptoAPIService {
-  private cryptoUrl = 'https://min-api.cryptocompare.com/data/top/totalvolfull?limit=50&tsym=USD' //'https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR';
+  private cryptoUrl = 'https://min-api.cryptocompare.com/data/top/totalvolfull?limit=100&tsym=USD' //'https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR';
 
   private chartUrl='https://min-api.cryptocompare.com/data/histoday?fsym=';
   private detailUrl='https://min-api.cryptocompare.com/data/top/exchanges/full?fsym=';
+  private marketsUrl='https://min-api.cryptocompare.com/data/top/exchanges/full?fsym=';
   constructor(private Http: HttpClient) { }
 
   getCrypto(): Observable<Crypto> {
@@ -37,7 +39,9 @@ export class CryptoAPIService {
 getArticle():Observable<Crypto> {
   
   return this.Http.get<Crypto>("https://min-api.cryptocompare.com/data/v2/news/?lang=EN");
-
-
+}
+getMarkets(coin):Observable<Crypto> {
+  
+  return this.Http.get<Crypto>(this.marketsUrl+ coin);
 }
 }

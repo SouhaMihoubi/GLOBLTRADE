@@ -1,20 +1,76 @@
  .example-card {
-     height: 500px;
+     height: 400px;
      display: flex;
      flex-direction: column;
  }
  
  .card {
-     height: 800px;
+     height: 650px;
  }
+ .long{
+    height: 1000px;
+ }
+  .news-source {
+    
+    font-size: 13px;
+    font-weight: bold;
+    color: #f79a35;
+    
+}
+.news-footer {
+    overflow: hidden;
+    line-height: 27px;
+    color: #999;
+    font-size: 13px;
+}
+
  
  .image {
      width: 180px;
      height: 180px;
      margin: 10px;
  }
+ .img{
+    width: 120px;
+    height: 120px;
+    margin: 10px;
+    
  
- mat-tab-group {
-     display: flex;
-     flex-direction: column;
  }
+ .largeur{
+     height: 100px;
+ }
+ .center
+ {
+     text-align: center;
+     vertical-align: center;
+ }
+ .news-date {
+    float: left;
+    font-size: 13px;
+    color: #999;
+}
+ .news-data {
+    overflow: hidden;
+    text-align: left;
+}
+ .price{
+     font-size: 25px;
+ }
+ .txt{
+     text-align: end;
+ }
+ .mar{
+     height: 50px;
+ }
+
+
+ mat-card {
+     margin: 5px;
+ }
+ mat-card-title{
+     font-size: 16px;
+ }
+.val{
+    font-size: 12px;
+}

@@ -16,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CryptoAPIService } from './crypto-api.service';
 import { MatTableModule } from '@angular/material';
 import { CointableComponent } from './cointable/cointable.component';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
@@ -39,6 +39,7 @@ import { environment } from '../environments/environment';
 import { AuthService } from './auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
 import { from } from 'rxjs';
 @NgModule({
   declarations: [
