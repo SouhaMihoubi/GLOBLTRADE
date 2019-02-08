@@ -42,6 +42,8 @@ export class CointableComponent implements OnInit {
     this.dataSource = new MatTableDataSource(data.Data);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    console.log(this.paginator);
+    console.log(this.dataSource.paginator);
     this.dataSource.filterPredicate =
      (datas: Crypto, filters: string) => {
      return  JSON.stringify(datas).indexOf(filters)!=-1;

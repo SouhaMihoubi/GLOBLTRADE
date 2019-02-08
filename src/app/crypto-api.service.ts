@@ -43,6 +43,6 @@ getArticle(coin):Observable<Crypto> {
 }
 getMarkets(coin):Observable<Crypto> {
   
-  return this.Http.get<Crypto>(this.marketsUrl+ coin+"&tsym=USD&limit=20");
+  return this.Http.get<Crypto>(this.marketsUrl+ coin+"&tsym=USD&limit=50");
 }
 }
