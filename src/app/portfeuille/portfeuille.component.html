@@ -67,7 +67,7 @@
 
 
 
-    <div *ngFor="let item of items | async">
+    <div *ngFor="let item of lists">
 
         <div *ngFor=" let coin of result">
 
@@ -75,7 +75,8 @@
 
                 <mat-card fxFlex="20" fxFlexOffset="5">
 
-                    <mat-card-content><img class="image" src="https://www.cryptocompare.com{{coin.CoinInfo.ImageUrl}}">{{coin.CoinInfo.Name}} </mat-card-content>
+                    <mat-card-content><img class="image" src="https://www.cryptocompare.com{{coin.CoinInfo.ImageUrl}}">{{coin.CoinInfo.Name}}
+                    </mat-card-content>
                     <mat-card-footer></mat-card-footer>
 
                 </mat-card>
@@ -108,7 +109,7 @@
                 <mat-card fxFlex="10">
                     <mat-card-content> <button mat-raised-button>
                             <mat-icon>add</mat-icon>Buy/Sell
-                          </button></mat-card-content>
+                        </button></mat-card-content>
 
                 </mat-card>
 

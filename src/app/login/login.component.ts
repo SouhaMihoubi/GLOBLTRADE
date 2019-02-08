@@ -4,8 +4,9 @@ import { Observable, from } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
 import { auth } from 'firebase/app';
+import { map } from 'rxjs/internal/operators/map';
+import { log } from 'util';
 
 @Component({
   selector: 'app-login',
@@ -25,20 +26,26 @@ import { auth } from 'firebase/app';
 
 export class LoginComponent {
   loginForm: FormGroup;
+  items: Observable<any[]>;
+
+
   // tslint:disable-next-line:no-inferrable-types
   errorMessage: string = '';
+  element: any;
+  itemsRef: AngularFireList<any>;
 
-  constructor(public authService: AuthService, public afAuth: AngularFireAuth, private router: Router, private fb: FormBuilder) {
+
+  constructor(db: AngularFireDatabase, public afAuth: AngularFireAuth, private router: Router, private fb: FormBuilder) {
 
     this.createForm();
-    /*
-        this.itemsRef = db.list('user');
-        // Use snapshotChanges().map() to store the key
-        this.items = this.itemsRef.snapshotChanges().pipe(
-          map(changes =>
-            changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-          )
-        ); */
+
+    this.itemsRef = db.list('users');
+    // Use snapshotChanges().map() to store the key
+    this.items = this.itemsRef.snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    );
 
 
   }
@@ -50,21 +57,36 @@ export class LoginComponent {
   }
   logout() {
     this.afAuth.auth.signOut();
+    let connected = [];
+    localStorage.setItem("connected", JSON.stringify(connected));
   }
-  login() {
+  loginEmail() {
     this.afAuth.auth.signInWithRedirect(new auth.GoogleAuthProvider());
   }
 
   tryLogin(value) {
-    console.log(value);
+    this.afAuth.auth.signInWithEmailAndPassword(value.email, value.password).then(res => {
+      console.log(res.user.uid);
 
-    this.authService.doLogin(value)
-      .then(res => {
-        console.log(true);
-        //  this.router.navigate(['/user']);
-      }, err => {
-        console.log(err);
-        this.errorMessage = err.message;
+      this.items.forEach(user => {
+
+        user.forEach(u => {
+
+          if (u.uid === res.user.uid) {
+
+            console.log(true);
+            localStorage.setItem("connected", JSON.stringify(u));
+            this.router.navigate(['/portfolio']);
+
+
+          }
+        })
+
       });
+
+
+
+      //  this.router.navigate(['/user']);
+    });
   }
 }
