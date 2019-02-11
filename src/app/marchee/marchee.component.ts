@@ -26,7 +26,7 @@ export class MarcheeComponent implements OnInit {
   datas;
   result;
   article;
-  market;
+  
   
   
   constructor(public CryptoService: CryptoAPIService,
@@ -113,12 +113,15 @@ export class MarcheeComponent implements OnInit {
     })
 
   }
+ 
   marketsData() {
     let id = this.route.snapshot.paramMap.get('id');
-    this.CryptoService.getMarkets(id).subscribe(markets => {
-      this.market = markets.Data;
-      console.log(this.market);
-    });
+    this.CryptoService.getMarkets(id).subscribe((data: any) => {
+      //console.log(data.Data.Exchanges);
+      this.dataSource = new MatTableDataSource(data.Data.Exchanges);      
+      this.dataSource.paginator = this.paginator;
+      
+  }); 
   }
 
   articleData(){
