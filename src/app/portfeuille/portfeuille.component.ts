@@ -8,8 +8,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs';
 import { connect } from 'net';
+import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 
 
+let connected = JSON.parse(localStorage.getItem("connected"));
 
 
 export interface DialogData {
@@ -28,6 +30,7 @@ export interface DialogData {
 
 
 export class PortfeuilleComponent implements OnInit {
+
   buyForm: FormGroup;
   interval: any;
   itemsRef: AngularFireList<any>;
@@ -47,7 +50,6 @@ export class PortfeuilleComponent implements OnInit {
   Buy_Price: string;
   Currency: string;
   Bought: string;
-
 
   transaction = { coin: '', amount: '', Buy_Price: '', Currency: '', Bought: '', uid: "" };
 
@@ -77,6 +79,8 @@ export class PortfeuilleComponent implements OnInit {
 
 
   refreshData() {
+    this.lists = [];
+
     this.prof_loss = 0;
     this.CryptoService.getCrypto().subscribe(res => {
       this.result = res.Data;
@@ -87,7 +91,8 @@ export class PortfeuilleComponent implements OnInit {
         this.items.subscribe(items => {
           items.forEach(element => {
 
-            if (resapi.CoinInfo.Name == element.coin) {
+            if ((resapi.CoinInfo.Name == element.coin) && (connected.uid)) {
+              this.lists.push(element);
               this.prof_loss += ((resapi.RAW.USD.PRICE) * parseInt(element.amount)) - (parseInt(element.Buy_Price) * parseInt(element.amount));
             }
 
@@ -137,11 +142,12 @@ export class PortfeuilleComponent implements OnInit {
     });
 
   }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(PortfeuilleComponentDialog, {
       width: '600px',
       // height: '400px',
-      data: { coin: this.coin, amount: this.amount, Buy_Price: this.Buy_Price, Currency: this.Currency, Bought: this.Bought, uid: "" }
+      data: { coin: this.coin, amount: this.amount, Buy_Price: this.Buy_Price, Currency: this.Currency, Bought: this.Bought, uid: connected.uid }
     });
 
     dialogRef.afterClosed().subscribe(result => {
