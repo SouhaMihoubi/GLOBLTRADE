@@ -1,7 +1,13 @@
 <div mat-dialog-content>
 
     <mat-form-field>
-        <input placeholder="Coin" matInput [(ngModel)]="data.coin">
+        <select placeholder="Coin" matInput [(ngModel)]="data.coin">
+                <div *ngFor=" let coin of result">
+
+<option>{{coin.CoinInfo.Name}}</option>
+</div>
+        </select>
+        <!--  <input placeholder="Coin" matInput [(ngModel)]="data.coin"> -->
     </mat-form-field>
     <mat-form-field>
         <input placeholder="Amount" matInput [(ngModel)]="data.amount">
