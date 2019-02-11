@@ -18,11 +18,22 @@
     </mat-card>
     <mat-card fxFlex="15">
         <mat-card-title>Profit / Loss </mat-card-title>
-        <mat-card-content></mat-card-content>
+        <mat-card-content>{{prof_loss.toFixed(2)}}</mat-card-content>
     </mat-card>
     <mat-card fxFlex="15">
         <mat-card-title>Holdings </mat-card-title>
-        <mat-card-content></mat-card-content>
+        <mat-card-content>
+            <div *ngFor="let item of items | async;let i=index ">
+
+                <div *ngFor=" let coin of result">
+
+                    <div *ngIf="coin.CoinInfo.Name == item.coin">
+                        <!--     <div> {{((item.amount*coin.RAW.USD.PRICE)-(item.amount*item.Buy_Price)).toFixed(2)}}</div> -->
+                    </div>
+                </div>
+            </div>
+
+        </mat-card-content>
     </mat-card>
 
 </div>
@@ -57,7 +68,7 @@
             <mat-card-title>Change</mat-card-title>
 
         </mat-card>
-        <mat-card fxFlex="10">
+        <mat-card fxFlex="15">
             <mat-card-title>Buy/Sell</mat-card-title>
 
         </mat-card>
@@ -103,13 +114,21 @@
 
                 </mat-card>
                 <mat-card fxFlex="10">
-                    <mat-card-content>{{((((item.amount*coin.RAW.USD.PRICE.toFixed(2))-(item.amount*item.Buy_Price))/((item.amount*item.Buy_Price)))*100).toFixed(2)}}%</mat-card-content>
+                    <mat-card-content>
+                        {{((((item.amount*coin.RAW.USD.PRICE.toFixed(2))-(item.amount*item.Buy_Price))/((item.amount*item.Buy_Price)))*100).toFixed(2)}}%
+                    </mat-card-content>
 
                 </mat-card>
-                <mat-card fxFlex="10">
-                    <mat-card-content> <button mat-raised-button>
-                            <mat-icon>add</mat-icon>Buy/Sell
-                        </button></mat-card-content>
+                <mat-card fxFlex="15">
+                    <mat-card-content>
+                        <span>
+                            <button mat-raised-button (click)="openDialog()">
+                                <mat-icon>add_box</mat-icon>
+                            </button></span>
+                        <span><button mat-raised-button (click)="sellcoin()">
+                                <mat-icon>indeterminate_check_box</mat-icon>
+                            </button></span>
+                    </mat-card-content>
 
                 </mat-card>
 
@@ -121,126 +140,3 @@
 
     </div>
 </div>
-
-<!-- <mat-toolbar color="primary" class="md-toolbar1">
-        <div class="md-toolbar1">
-            <h1>Add a Coin</h1>
-            <button (click)="onNoClick()" mat-stroked-button tabIndex="-1">
-          <mat-icon color="warn">clear</mat-icon>
-        </button>
-        </div>
-    </mat-toolbar>-->
-<mat-tab-group>
-
-
-
-    <mat-tab label="Buy">
-
-        <!--   <div>
-                <form #f="ngForm"  (submit)="addTransaction(f.value)" class="example-container">
-                    <mat-form-field>
-                        <input matInput type="text" [(ngModel)]="transaction.coin" name="coin" placeholder="coin" required/>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput type="text" [(ngModel)]="transaction.amount" name="amount" placeholder="amount" required/>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput type="text" [(ngModel)]="transaction.Buy_Price" name="Buy_Price" placeholder="Buy_Price" required/>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput type="text" [(ngModel)]="transaction.Currency" name="Currency" placeholder="Currency" required/>
-                    </mat-form-field>
-                   
-                    <mat-form-field class="example-full-width">
-                        <input matInput [matDatepicker]="picker" placeholder="Bought On" [(ngModel)]="transaction.Bought" name="Bought">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker touchUi #picker></mat-datepicker>
-                    </mat-form-field>
-    
-                    <button mat-button type="submit">Add Coin</button>
-                </form>
-            </div> -->
-        <form (submit)="addTransaction(buyForm.value)" [formGroup]="buyForm">
-
-
-            <mat-form-field>
-                <input matInput placeholder="Coin" formControlName="coin">
-            </mat-form-field>
-            <mat-grid-list cols="1" rowHeight="100px">
-                <mat-grid-tile>
-
-                    <mat-form-field>
-                        <input matInput placeholder="Amount*" formControlName="amount">
-
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder="Buy Price" formControlName="Buy_Price">
-
-                    </mat-form-field>
-
-                </mat-grid-tile>
-                <mat-grid-tile>
-
-                    <mat-form-field>
-                        <input matInput placeholder="Currency" formControlName="Currency">
-
-                    </mat-form-field>
-
-                    <mat-form-field class="example-full-width">
-                        <input matInput [matDatepicker]="picker" placeholder="Bought On" formControlName="Bought">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker touchUi #picker></mat-datepicker>
-                    </mat-form-field>
-
-                </mat-grid-tile>
-                <label class="error">{{errorMessage}}</label>
-                <label class="success">{{successMessage}}</label>
-            </mat-grid-list>
-            <div class="controles-container">
-
-                <div class="button-row">
-                    <button mat-raised-button color="primary" type="submit">Submit</button>
-                    <button (click)="onNoClick()" mat-raised-button color="warn">Exit</button>
-                </div>
-            </div>
-        </form>
-    </mat-tab>
-    <mat-tab label="Sell">
-        <form>
-            <mat-form-field>
-                <input matInput placeholder="Coin">
-            </mat-form-field>
-            <mat-grid-list cols="1" rowHeight="100px">
-                <mat-grid-tile>
-
-                    <mat-form-field>
-                        <input matInput placeholder="Amount*">
-
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder="Sell Price">
-
-                    </mat-form-field>
-
-                </mat-grid-tile>
-                <mat-grid-tile>
-
-                    <mat-form-field>
-                        <input matInput placeholder="Currency">
-
-                    </mat-form-field>
-
-
-
-                </mat-grid-tile>
-            </mat-grid-list>
-            <div class="controles-container">
-
-                <div class="button-row">
-                    <button mat-raised-button color="primary" type="submit">Submit</button>
-                    <button (click)="onNoClick()" mat-raised-button color="warn">Exit</button>
-                </div>
-            </div>
-        </form>
-    </mat-tab>
-</mat-tab-group>
