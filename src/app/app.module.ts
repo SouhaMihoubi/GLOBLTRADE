@@ -10,7 +10,8 @@ import { MarketComponent } from './market/market.component';
 import { CryptoComponent } from './crypto/crypto.component';
 import { MarcheeComponent } from './marchee/marchee.component';
 import { WatchlisteComponent } from './watchliste/watchliste.component';
-import { PortfeuilleComponent } from './portfeuille/portfeuille.component';
+import { PortfeuilleComponent ,PortfeuilleComponentDialog, sellcoinDialog} from './portfeuille/portfeuille.component';
+
 import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CryptoAPIService } from './crypto-api.service';
@@ -27,7 +28,7 @@ import { OverlayModule } from "@angular/cdk/overlay";
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DialogOverviewExample, DialogOverviewExampleDialog } from './portfeuille/dialog-overview-example/dialog-overview-example';
+//import { DialogOverviewExample} from './portfeuille/dialog-overview-example';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -42,6 +43,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { from } from 'rxjs';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,13 +58,10 @@ import { from } from 'rxjs';
     WatchlisteComponent,
     PortfeuilleComponent,
     FooterComponent,
-    
-    DialogOverviewExample,
-    DialogOverviewExampleDialog,
+    PortfeuilleComponent ,PortfeuilleComponentDialog,sellcoinDialog,
     CoinDetailComponent
   ],
-  entryComponents: [DialogOverviewExample,
-    DialogOverviewExampleDialog],
+  entryComponents: [PortfeuilleComponentDialog,sellcoinDialog],
   imports: [MatIconModule, MatMenuModule, AngularFireModule.initializeApp(environment.firebase), AngularFireDatabaseModule,
     ReactiveFormsModule, MatNativeDateModule,
     MatGridListModule,
@@ -95,9 +94,11 @@ import { from } from 'rxjs';
     MatSortModule ,
     MatTabsModule,
     MatToolbarModule,
+    
   ],
   providers: [CryptoAPIService, AuthService, AngularFireAuth,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }
