@@ -16,6 +16,7 @@ export class NavComponent implements OnInit {
   }
   logout() {
     this.afAuth.auth.signOut();
+    localStorage.clear();
     this.router.navigate(['/login']);
 
 

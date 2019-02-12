@@ -8,7 +8,7 @@ import {Chart} from 'chart.js'
 
 })
 export class CryptoAPIService {
-  private cryptoUrl = 'https://min-api.cryptocompare.com/data/top/totalvolfull?limit=100&tsym=USD' //'https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR';
+  private cryptoUrl = 'https://min-api.cryptocompare.com/data/top/totalvolfull?limit=20&tsym=USD' //'https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR';
 
   private chartUrl='https://min-api.cryptocompare.com/data/histoday?fsym=';
   private detailUrl='https://min-api.cryptocompare.com/data/top/exchanges/full?fsym=';

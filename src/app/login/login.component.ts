@@ -42,7 +42,7 @@ export class LoginComponent {
     this.itemsRef = db.list('users');
     // Use snapshotChanges().map() to store the key
     this.items = this.itemsRef.snapshotChanges().pipe(
-      map(changes =>
+      map((changes: any)=>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
@@ -76,7 +76,8 @@ export class LoginComponent {
 
             console.log(true);
             localStorage.setItem("connected", JSON.stringify(u));
-            this.router.navigate(['/portfolio']);
+            this.router.navigate(['/']);
+          //  window.location.replace('http://localhost:4200/portfolio');
 
 
           }

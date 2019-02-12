@@ -6,12 +6,11 @@ import { FormBuilder, FormGroup, Validators, NG_VALUE_ACCESSOR } from '@angular/
 import { AngularFireDatabase, AngularFireList, listChanges } from '@angular/fire/database';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { map } from 'rxjs/internal/operators/map';
-import { Observable } from 'rxjs';
-import { connect } from 'net';
-import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
+import { Observable, empty } from 'rxjs';
 
 
-let connected = JSON.parse(localStorage.getItem("connected"));
+
+let connected = JSON.parse(localStorage.getItem("connected")) || [];
 
 
 export interface DialogData {
@@ -41,17 +40,18 @@ export class PortfeuilleComponent implements OnInit {
   totalCost: any;
   prof_loss: any;
   uid: string;
-  lists = [];
-
-
-  result;
+   result;
   coin: string;
+  current: string;
   amount: string;
   Buy_Price: string;
   Currency: string;
   Bought: string;
-
-  transaction = { coin: '', amount: '', Buy_Price: '', Currency: '', Bought: '', uid: "" };
+  url: string;
+  coins: any;
+  afficher=false;
+  
+  transaction = { coin: '', amount: '', Buy_Price: '', Currency: '', Bought: '', uid: '', current: '', url: '' };
 
   constructor(
     public dialog: MatDialog,
@@ -79,24 +79,31 @@ export class PortfeuilleComponent implements OnInit {
 
 
   refreshData() {
-    this.lists = [];
 
+    let lists = [];
     this.prof_loss = 0;
+    this.totalCost = 0;
+    
     this.CryptoService.getCrypto().subscribe(res => {
       this.result = res.Data;
 
 
-
       this.result.forEach(resapi => {
-        this.items.subscribe(items => {
-          items.forEach(element => {
+        this.items.subscribe(aaa => {
+          //this.coins=coins;
+          aaa.forEach(element => {
 
-            if ((resapi.CoinInfo.Name == element.coin) && (connected.uid)) {
-              this.lists.push(element);
-              this.prof_loss += ((resapi.RAW.USD.PRICE) * parseInt(element.amount)) - (parseInt(element.Buy_Price) * parseInt(element.amount));
+            if ((resapi.CoinInfo.Name == element.coin) && (connected.uid == element.uid)) {
+             
+               
+              this.itemsRef.update(element.key, { current: resapi.RAW.USD.PRICE, url: resapi.CoinInfo.ImageUrl })
+           //  this.prof_loss += ((resapi.RAW.USD.PRICE) * parseInt(element.amount)) - (parseInt(element.Buy_Price) * parseInt(element.amount));
             }
 
           });
+
+
+
         });
       })
 
@@ -104,68 +111,123 @@ export class PortfeuilleComponent implements OnInit {
     })
 
 
+  } 
 
+
+  showcoin() {
+    //this.refreshData();
+
+    this.items.subscribe(coins => {
+     
+      this.coins = coins.filter(elem => elem.uid === connected.uid);
+     // console.log(this.coins);
+      if (this.coins.length ==0) {
+
+        this.afficher=false;
+      }else{
+        this.afficher=true;
+      }
+      
+     
+    });
   }
-
   ngAfterViewInit() {
 
     this.interval = setInterval(() => {
-      this.refreshData();
-    }, 10000);
+      
+     //this.refreshData();
+     this.updateprofil();
 
+    this.showcoin();
+  this.updatecost();
+    }, 10000);
+    
 
   }
 
 
 
   ngOnInit() {
+    this.prof_loss = 0;
     this.totalCost = 0;
+    
     this.refreshData();
+     
 
-    this.updatecost();
-
+    this.showcoin();
+  this.updatecost();
+  this.updateprofil();   
   }
-
-
-  updatecost() {
-    this.totalCost = 0;
-    // cost=0;
+  updateprofil() {
+    this.prof_loss = 0;
+    
     this.profil.subscribe(prof => {
-      prof.forEach(el => {
+      prof.forEach(ele => {
+        if ((connected.uid == ele.uid)) {
+         
+          this.prof_loss += (parseInt(ele.current) * parseInt(ele.amount)) - (parseInt(ele.Buy_Price) * parseInt(ele.amount));
+        }
 
-        this.totalCost += parseInt(el.Buy_Price) * parseInt(el.amount);
 
       });
 
-      // this.totalCost=cost; 
 
     });
 
   }
+  sellcoin(key: any){
+
+    console.log(key);
+    this.itemsRef.remove(key);
+  }
+
+  updatecost() {
+    this.totalCost = 0;
+    
+    this.profil.subscribe(prof => {
+      prof.forEach(el => {
+        if ((connected.uid == el.uid)) {
+          this.totalCost += parseInt(el.Buy_Price) * parseInt(el.amount);
+
+        }
+
+
+      });
+
+
+    });
+
+  } 
 
   openDialog(): void {
     const dialogRef = this.dialog.open(PortfeuilleComponentDialog, {
       width: '600px',
       // height: '400px',
-      data: { coin: this.coin, amount: this.amount, Buy_Price: this.Buy_Price, Currency: this.Currency, Bought: this.Bought, uid: connected.uid }
+      data: { coin: this.coin, amount: this.amount, Buy_Price: this.Buy_Price, Currency: this.Currency, Bought: this.Bought, uid: connected.uid, current: "", url: "" }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.transaction = result;
-      console.log(this.transaction);
+      //console.log(this.transaction);
       this.itemsRef.push(this.transaction);
-      this.totalCost = 0;
-      this.prof_loss = 0;
-      // this.updatecost();
+     // this.afficher=true;
+     this.updatecost();
+     this.updateprofil();
+     this.showcoin();
 
     });
   }
-  sellcoin(): void {
-    const dialogRef = this.dialog.open(sellcoinDialog, {
+ /* sellcoin(key: any): void {
+
+    
+      this.itemsRef.remove(key);
+    
+
+  const dialogRef = this.dialog.open(sellcoinDialog, {
       width: '600px',
       // height: '400px',
-      data: { coin: this.coin, amount: this.amount, Buy_Price: this.Buy_Price, Currency: this.Currency, Bought: this.Bought, uid: "" }
+      data: { coin: this.coin, amount: this.amount, Buy_Price: this.Buy_Price, Currency: this.Currency, Bought: this.Bought, uid: "", url: "" }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -176,10 +238,10 @@ export class PortfeuilleComponent implements OnInit {
       this.totalCost = 0;
       this.prof_loss = 0;
       // this.updatecost();
-
-    });
+this.refreshData();
+    }); 
   }
-
+*/
 
 }
 
